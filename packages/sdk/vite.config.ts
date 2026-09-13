@@ -2,7 +2,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 
 // TODO: replace with the real deployed checkout origin once apps/checkout is deployed.
-const PROD_CHECKOUT_URL = "https://dodo-checkout-demo.example.com";
+const PROD_CHECKOUT_URL = "https://dodo-checkout-ivory.vercel.app/";
 const DEV_CHECKOUT_URL = "http://localhost:5174";
 
 export default defineConfig(({ mode }) => ({
