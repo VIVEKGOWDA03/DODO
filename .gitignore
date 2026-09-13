@@ -3,3 +3,8 @@ dist
 dist-ssr
 *.local
 .DS_Store
+
+# Local docs
+CLAUDE.md
+TESTCASES.md
+assignment.md
