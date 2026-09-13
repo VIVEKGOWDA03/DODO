@@ -1,0 +1,10 @@
+{
+  "name": "dodo-checkout",
+  "private": true,
+  "scripts": {
+    "dev:demo": "npx pnpm@9 --filter demo dev",
+    "dev:checkout": "npx pnpm@9 --filter checkout dev",
+    "build": "npx pnpm@9 -r build",
+    "typecheck": "npx pnpm@9 -r typecheck"
+  }
+}

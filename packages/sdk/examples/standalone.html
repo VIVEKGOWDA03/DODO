@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  A deliberately plain, tooling-free HTML page — no bundler, no framework, no
+  build step. This is the literal "one script a developer can drop into
+  their site" scenario: a <script src> tag and a global DodoCheckout.
+
+  To try it locally:
+    1. pnpm --filter @dodo/sdk build:dev   (bakes in http://localhost:5174)
+    2. make sure the checkout dev server is running (pnpm --filter checkout dev)
+    3. serve this folder with any static file server, e.g.:
+         npx serve packages/sdk/examples
+       (opening it directly via file:// will not work — the browser blocks
+       the iframe's postMessage handshake for file:// origins)
+    4. open the served standalone.html and click "Buy Now"
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vanilla Merchant Site (no framework, no bundler)</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 480px;
+        margin: 64px auto;
+        padding: 0 16px;
+        color: #0f172a;
+      }
+      button {
+        background: #4f46e5;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      pre {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Aura SoundMaster Pro X</h1>
+    <p>₹24,999 — a plain HTML page with zero build tooling, using the SDK exactly as an external merchant would.</p>
+    <button id="buy">Buy Now</button>
+    <h3>Event log</h3>
+    <pre id="log">Waiting for checkout events…</pre>
+
+    <!-- This is the entire integration: one script tag, one global. -->
+    <script src="../dist/dodo-checkout.js"></script>
+    <script>
+      const log = document.getElementById("log");
+      function append(line) {
+        log.textContent = log.textContent === "Waiting for checkout events…" ? line : log.textContent + "\n" + line;
+      }
+
+      document.getElementById("buy").addEventListener("click", () => {
+        append("checkout.opened");
+        DodoCheckout.open({
+          productId: "prod_123",
+          onSuccess: ({ sessionId }) => append("payment.success sessionId=" + sessionId),
+          onError: ({ code, message }) => append("payment.error " + code + ": " + message),
+          onClose: ({ reason }) => append("checkout.closed reason=" + reason),
+        });
+      });
+    </script>
+  </body>
+</html>

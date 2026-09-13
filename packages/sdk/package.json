@@ -1,0 +1,17 @@
+{
+  "name": "@dodo/sdk",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "src/dodo-checkout.ts",
+  "types": "src/dodo-checkout.ts",
+  "scripts": {
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vite": "^8.3.0"
+  }
+}

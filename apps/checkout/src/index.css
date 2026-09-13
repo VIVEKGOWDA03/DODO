@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+/*
+ * The SDK paints the dim backdrop on the merchant page, behind the iframe.
+ * This app must stay transparent so that backdrop shows through around the
+ * modal card instead of being hidden behind an opaque iframe.
+ */
+html,
+body,
+#root {
+  background: transparent;
+}
+
+body {
+  font-family:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+@keyframes dodo-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.dodo-skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: dodo-shimmer 1.8s infinite ease-in-out;
+}
+
+@keyframes dodo-checkmark {
+  0% {
+    stroke-dashoffset: 48;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes dodo-circle-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dodo-animate-check {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 0;
+  animation: dodo-checkmark 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.dodo-animate-pulse-success {
+  animation: dodo-circle-pulse 0.5s ease-out forwards;
+}
+
+@keyframes dodo-countdown-bar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.dodo-countdown-progress {
+  animation: dodo-countdown-bar 3s linear forwards;
+}
+
+@keyframes dodo-gentle-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+.dodo-shake-banner {
+  animation: dodo-gentle-shake 0.4s ease-in-out;
+}
+
+@keyframes dodo-drop-in {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dodo-animate-drop-in {
+  animation: dodo-drop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
